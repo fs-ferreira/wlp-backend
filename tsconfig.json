@@ -1,11 +1,16 @@
 {
   "compilerOptions": {
     "module": "commonjs",
+    "typeRoots": [
+      ".src/@types"
+    ],
     "esModuleInterop": true,
     "target": "ES2017",
     "moduleResolution": "node",
     "sourceMap": true,
     "outDir": "dist"
   },
-  "lib": ["ES2017"]
+  "lib": [
+    "ES2017"
+  ]
 }

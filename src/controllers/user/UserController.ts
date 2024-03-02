@@ -9,8 +9,16 @@ class UserController {
     const user = await new UserService()
       .executeCreate({ name, email, password })
 
+    return res.status(201).json(user)
+  }
+
+  async handleDetail(req: Request, res: Response) {
+    const user = await new UserService()
+      .executeDetail(req.user_id)
+
     return res.json(user)
   }
+
 }
 
 export { UserController };
