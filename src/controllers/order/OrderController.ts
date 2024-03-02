@@ -36,6 +36,29 @@ class OrderController {
     return res.status(204).send()
   }
 
+  async handleSend(req: Request, res: Response) {
+    const { id } = req.body
+    const order = await new OrderService().executeSend(id)
+    return res.json(order)
+  }
+
+  async handleList(req: Request, res: Response) {
+    const orders = await new OrderService().executeList()
+    return res.json(orders)
+  }
+
+  async handleDetail(req: Request, res: Response) {
+    const { id } = req.params
+    const order = await new OrderService().executeDetail(id)
+    return res.json(order)
+  }
+
+  async handleClose(req: Request, res: Response) {
+    const { id } = req.body
+    const order = await new OrderService().executeClose(id)
+    return res.json(order)
+  }
+
 }
 
 export { OrderController }

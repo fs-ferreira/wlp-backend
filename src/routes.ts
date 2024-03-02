@@ -13,21 +13,31 @@ const router = Router();
 
 const upload = multer(upoloadConfig.upload("./tmp"))
 
-router.post('/user', new UserController().handleCreate)
-router.post('/session', new AuthController().handle)
-router.get('/me', authGuard, new UserController().handleDetail)
+const userController = new UserController()
+const authController = new AuthController()
+const categoryController = new CategoryController()
+const productController = new ProductController()
+const orderInstance = new OrderController()
 
-router.post('/category', authGuard, new CategoryController().handleCreate)
-router.get('/category', authGuard, new CategoryController().handleList)
-router.delete('/category/:id', authGuard, new CategoryController().handleDelete)
+router.get('/me', authGuard, userController.handleDetail)
+router.post('/user', userController.handleCreate)
+router.post('/session', authController.handle)
 
-router.post('/product', authGuard, upload.single('file'), new ProductController().handleCreate)
-router.get('/product', authGuard, new ProductController().handleListByCategory)
+router.get('/category', authGuard, categoryController.handleList)
+router.post('/category', authGuard, categoryController.handleCreate)
+router.delete('/category/:id', authGuard, categoryController.handleDelete)
 
-router.post('/order', authGuard, new OrderController().handleCreate)
-router.delete('/order/:id', authGuard, new OrderController().handleDelete)
-router.post('/order/item', authGuard, new OrderController().handleAddItem)
-router.delete('/order/item/:id', authGuard, new OrderController().handleDeleteItem)
+router.get('/product', authGuard, productController.handleListByCategory)
+router.post('/product', authGuard, upload.single('file'), productController.handleCreate)
+
+router.get('/order', authGuard, orderInstance.handleList)
+router.get('/order/:id', authGuard, orderInstance.handleDetail)
+router.post('/order', authGuard, orderInstance.handleCreate)
+router.put('/order/send', authGuard, orderInstance.handleSend)
+router.put('/order/close', authGuard, orderInstance.handleClose)
+router.delete('/order/:id', authGuard, orderInstance.handleDelete)
+router.post('/order/item', authGuard, orderInstance.handleAddItem)
+router.delete('/order/item/:id', authGuard, orderInstance.handleDeleteItem)
 
 
 export { router };
