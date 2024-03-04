@@ -29,6 +29,7 @@ router.delete('/category/:id', authGuard, categoryController.handleDelete)
 
 router.get('/product', authGuard, productController.handleListByCategory)
 router.post('/product', authGuard, upload.single('file'), productController.handleCreate)
+router.delete('/product/:id', authGuard, productController.handleDelete)
 
 router.get('/order', authGuard, orderInstance.handleList)
 router.get('/order/:id', authGuard, orderInstance.handleDetail)

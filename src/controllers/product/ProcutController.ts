@@ -26,6 +26,12 @@ class ProductController {
     return res.json(products)
   }
 
+  async handleDelete(req: Request, res: Response) {
+    const { id } = req.params
+    await new ProdcutService().executeDelete(id)
+    return res.status(204).send()
+  }
+
 }
 
 export { ProductController }

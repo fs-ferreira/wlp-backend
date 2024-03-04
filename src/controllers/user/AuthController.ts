@@ -12,7 +12,6 @@ class AuthController {
     })
 
     return res.json(auth)
-
   }
 
 }
